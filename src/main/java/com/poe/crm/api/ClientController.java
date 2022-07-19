@@ -1,6 +1,8 @@
 package com.poe.crm.api;
 
 import com.poe.crm.business.Client;
+import com.poe.crm.business.service.CrmService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,14 +13,12 @@ import java.util.List;
 @RestController
 public class ClientController {
 
+    @Autowired
+    CrmService crmService;
+
     @GetMapping("clients")
     public List<Client> getAll() {
 
-        ArrayList<Client> clients = new ArrayList<>();
-        clients.add(new Client("Google", "Michel", "Dupont", "a@a.com", "0606066006", "12 rue de l'église", "75000",
-                "Paris", "France"));
-        clients.add(new Client("Google", "Marie", "Delon", "a@a.com", "0606066006", "12 rue de l'église", "75000",
-                "Paris", "France"));
-        return clients;
+        return crmService.getAllClients();
     }
 }

@@ -4,18 +4,14 @@ import com.poe.crm.business.Client;
 import com.poe.crm.business.service.CrmService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.Assert;
 
-@SpringBootTest
-class CrmApplicationTests {
-
-	@Autowired
-	CrmService crmService;
+class UnitTests {
 
 	@Test
-	void contextLoads() {
-
+	void testAjoutClient() {
+		CrmService crmService = new CrmService();
 		Client client = new Client();
 		client.setFirstName("Alain");
 		client.setLastName("Delon");

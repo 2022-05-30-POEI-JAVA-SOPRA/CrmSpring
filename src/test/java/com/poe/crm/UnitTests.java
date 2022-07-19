@@ -20,4 +20,14 @@ class UnitTests {
 		Assertions.assertEquals(1, crmService.getAllClients().size());
 	}
 
+	@Test
+	void testFindClient(){
+		CrmService crmService = new CrmService();
+		Client client = new Client();
+		client.setFirstName("Alain");
+		client.setLastName("Delon");
+		crmService.addClient(client);
+
+		Assertions.assertNotNull(crmService.findClient(1L));
+	}
 }

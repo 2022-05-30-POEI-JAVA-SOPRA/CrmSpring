@@ -5,10 +5,8 @@ import com.poe.crm.business.service.CrmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,4 +51,21 @@ public class ClientController {
 
     }
 
+
+    @PutMapping("clients/{id}")
+    public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody Client client){
+
+        if(! id.equals( client.getId())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).
+                    body("L'identifiant dans URL ne correspond à identifiant dans body");
+        } else {
+            if(crmService.updateClient(client)){
+                return ResponseEntity.status(HttpStatus.OK).build();
+            }
+            else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).
+                        body("L'identifiant ne correspond à aucun Client");
+            }
+        }
+    }
 }

@@ -56,4 +56,15 @@ public class CrmService {
 //        }
     }
 
+    public boolean updateClient(Client client){
+
+        for(Client c: clients){
+            if(c.getId().equals(client.getId())){
+                clients.remove(c);
+                clients.add(client);
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -42,8 +42,14 @@ public class ClientController {
     }
 
     @DeleteMapping("clients/{id}")
-    public void delete(@PathVariable("id") Long id) {
-        crmService.deleteClient(id);
+    public ResponseEntity<Client> delete(@PathVariable("id") Long id) {
+        boolean hasDeleted = crmService.deleteClient(id);
+        if(hasDeleted){
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
     }
 
 }

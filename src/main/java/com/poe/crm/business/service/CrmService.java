@@ -35,15 +35,18 @@ public class CrmService {
         return Optional.empty();
     }
 
-    public void deleteClient(Long id){
+    public boolean deleteClient(Long id){
         Iterator<Client> it = clients.iterator();
         while(it.hasNext()){
             Client client = it.next();
             if(client.getId().equals(id)) {
                 it.remove();
+                return true;
+
                 //break;  // Continue la boucle pour tester l'accès concurrentiel
             }
         }
+        return false;
 
 //        for(Client client: clients){
 //            if(client.getId().equals(id)){

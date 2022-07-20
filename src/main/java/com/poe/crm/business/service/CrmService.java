@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.BreakIterator;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,22 @@ public class CrmService {
         return Optional.empty();
     }
 
+    public void deleteClient(Long id){
+        Iterator<Client> it = clients.iterator();
+        while(it.hasNext()){
+            Client client = it.next();
+            if(client.getId().equals(id)) {
+                it.remove();
+                //break;  // Continue la boucle pour tester l'accès concurrentiel
+            }
+        }
 
+//        for(Client client: clients){
+//            if(client.getId().equals(id)){
+//                clients.remove(client);
+//                break;
+//            }
+//        }
+    }
 
 }

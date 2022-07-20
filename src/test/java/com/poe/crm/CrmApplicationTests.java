@@ -2,10 +2,13 @@ package com.poe.crm;
 
 import com.poe.crm.business.Client;
 import com.poe.crm.business.service.CrmService;
+import com.poe.crm.dao.ClientRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest
 class CrmApplicationTests {
@@ -13,8 +16,12 @@ class CrmApplicationTests {
 	@Autowired
 	CrmService crmService;
 
+	@Autowired
+	ClientRepository clientRepository;
+
+
 	@Test
-	void contextLoads() {
+	void testAddClient() {
 
 		Client client = new Client();
 		client.setFirstName("Alain");
@@ -22,6 +29,12 @@ class CrmApplicationTests {
 		crmService.addClient(client);
 
 		Assertions.assertEquals(1, crmService.getAllClients().size());
+	}
+
+	@Test
+	void testClientRepository() {
+		List<Client> sqlClients = clientRepository.findAll();
+		Assertions.assertTrue(sqlClients.size() > 0);
 	}
 
 }

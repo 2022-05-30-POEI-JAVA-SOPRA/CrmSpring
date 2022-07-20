@@ -1,9 +1,10 @@
 package com.poe.crm.business.service;
 
 import com.poe.crm.business.Client;
+import com.poe.crm.dao.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,8 +16,10 @@ public class CrmService {
     ArrayList<Client> clients = new ArrayList<>();
     long index = 0;
 
-    public List<Client> getAllClients() {
+    @Autowired
+    ClientRepository clientRepository;
 
+    public List<Client> getAllClients() {
         return clients;
     }
 

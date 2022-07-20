@@ -1,15 +1,25 @@
 package com.poe.crm.business;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="clients")
 public class Client {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String companyName;
+    @Column(name = "companyName")
+    private String companyName; // company_name
+    @Column(name = "firstName")
     private String firstName;
+    @Column(name = "lastName")
     private String lastName;
     private String email;
     private String phone;
     private String address;
+    @Column(name = "zipCode")
     private String zipCode;
     private String city;
     private String country;

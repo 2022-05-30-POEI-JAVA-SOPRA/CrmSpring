@@ -42,12 +42,13 @@ public class ClientController {
     }
 
     @DeleteMapping("clients/{id}")
-    public ResponseEntity<Client> delete(@PathVariable("id") Long id) {
+    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
         boolean hasDeleted = crmService.deleteClient(id);
         if(hasDeleted){
             return ResponseEntity.status(HttpStatus.OK).build();
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).
+                    body("L'identifiant ne correspond à aucun Client");
         }
 
     }

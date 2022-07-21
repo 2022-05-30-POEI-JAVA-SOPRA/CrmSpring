@@ -1,6 +1,7 @@
 package com.poe.crm;
 
 import com.poe.crm.business.Client;
+import com.poe.crm.business.Order;
 import com.poe.crm.business.service.CrmService;
 import com.poe.crm.dao.ClientRepository;
 import org.junit.jupiter.api.Assertions;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 class CrmApplicationTests {
@@ -53,6 +55,17 @@ class CrmApplicationTests {
 		Assertions.assertTrue(clientsGoogle.size() > 0);
 		for(Client client: clientsGoogle){
 			System.out.println(client);
+		}
+	}
+
+	@Test
+	void testOneToMany(){
+		Optional<Client> o = clientRepository.findById(1L);
+		if(o.isPresent()){
+			Client client = o.get();
+			for(Order order: client.getOrders()){
+				System.out.println(order);
+			}
 		}
 	}
 }

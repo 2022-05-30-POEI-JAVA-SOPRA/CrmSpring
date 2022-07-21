@@ -1,6 +1,7 @@
 package com.poe.crm.business;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="clients")
@@ -25,6 +26,10 @@ public class Client {
     private String country;
 
     private ClientState state;
+
+    @OneToMany(mappedBy="client", fetch = FetchType.EAGER)
+    private List<Order> orders;
+
 
     public Client() {
     }
@@ -147,5 +152,13 @@ public class Client {
                 ", country='" + country + '\'' +
                 ", state=" + state +
                 '}';
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

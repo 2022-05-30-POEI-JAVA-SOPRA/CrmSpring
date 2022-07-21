@@ -78,6 +78,7 @@ public class ClientController {
         return crmService.searchByCompanyName(companyName);
     }
 
+    // Exemple: http://localhost:8080/api/searchbyfirstnameandlastname?firstname=James&lastname=Bond
     @GetMapping("searchbyfirstnameandlastname")
     public List<Client> searchByFirstNameAndLastName(
             @RequestParam(value="firstname") String firstName,

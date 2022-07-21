@@ -90,4 +90,17 @@ public class CrmService {
     public List<Client> searchByFirstNameAndLastName(String firstName, String lastName){
         return clientRepository.findAllByFirstNameAndLastName(firstName, lastName);
     }
+
+
+    public float calculateExpense(Long clientId){
+        float total = 0;
+        Optional<Client> op = clientRepository.findById(clientId);
+        if(op.isPresent()){
+            Client client = op.get();
+            for(Order order : client.getOrders()){
+                total = total + order.getNbDays()*order.getUnitPrice();
+            }
+        }
+        return total;
+    }
 }

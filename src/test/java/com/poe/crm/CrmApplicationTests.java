@@ -68,4 +68,10 @@ class CrmApplicationTests {
 			}
 		}
 	}
+
+	@Test
+	void testCalculateExpense(){
+		float total = crmService.calculateExpense(1L);
+		Assertions.assertEquals(126450f, total);
+	}
 }

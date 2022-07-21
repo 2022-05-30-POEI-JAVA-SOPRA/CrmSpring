@@ -1,7 +1,9 @@
 package com.poe.crm.business.service;
 
 import com.poe.crm.business.Client;
+import com.poe.crm.business.Order;
 import com.poe.crm.dao.ClientRepository;
+import com.poe.crm.dao.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,10 @@ public class CrmService {
 
     @Autowired
     ClientRepository clientRepository;
+
+    @Autowired
+    OrderRepository orderRepository;
+
 
     public List<Client> getAllClients() {
         return clientRepository.findAll();
@@ -38,6 +44,38 @@ public class CrmService {
     public boolean updateClient(Client client){
         if(clientRepository.existsById(client.getId())) {
             clientRepository.save(client);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /************************************************/
+
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    public void addOrder(Order order) {
+        orderRepository.save(order);
+    }
+
+    public Optional<Order> findOrderById(Long id) {
+        return orderRepository.findById(id);
+    }
+
+    public boolean deleteOrder(Long id) {
+        if(orderRepository.existsById(id)) {
+            orderRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean updateOrder(Order order) {
+        if(orderRepository.existsById(order.getId())) {
+            orderRepository.save(order);
             return true;
         } else {
             return false;

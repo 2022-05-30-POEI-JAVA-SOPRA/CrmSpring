@@ -45,4 +45,14 @@ class CrmApplicationTests {
 			System.out.println(client);
 		}
 	}
+
+	@Test
+	void testFindAllByFirstNameAndLastName(){
+		List<Client> clientsGoogle = clientRepository.
+				findAllByFirstNameAndLastName("JC", "Dominguez");
+		Assertions.assertTrue(clientsGoogle.size() > 0);
+		for(Client client: clientsGoogle){
+			System.out.println(client);
+		}
+	}
 }

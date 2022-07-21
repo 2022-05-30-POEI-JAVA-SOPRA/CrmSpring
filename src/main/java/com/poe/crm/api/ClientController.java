@@ -77,4 +77,12 @@ public class ClientController {
 
         return crmService.searchByCompanyName(companyName);
     }
+
+    @GetMapping("searchbyfirstnameandlastname")
+    public List<Client> searchByFirstNameAndLastName(
+            @RequestParam(value="firstname") String firstName,
+            @RequestParam(value="lastname") String lastName){
+
+        return crmService.searchByFirstNameAndLastName(firstName,lastName);
+    }
 }

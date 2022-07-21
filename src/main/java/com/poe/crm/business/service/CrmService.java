@@ -85,4 +85,9 @@ public class CrmService {
     public List<Client> searchByCompanyName(String companyName){
         return clientRepository.findAllByCompanyName(companyName);
     }
+
+
+    public List<Client> searchByFirstNameAndLastName(String firstName, String lastName){
+        return clientRepository.findAllByFirstNameAndLastName(firstName, lastName);
+    }
 }

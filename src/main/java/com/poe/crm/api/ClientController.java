@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,5 +68,13 @@ public class ClientController {
                         body("L'identifiant ne correspond à aucun Client");
             }
         }
+    }
+
+    // Exemple : http://localhost:8080/api/searchclients?companyname=Google
+    @GetMapping("searchclients")
+    public List<Client> searchByCompanyName(
+            @RequestParam(value="companyname") String companyName){
+
+        return crmService.searchByCompanyName(companyName);
     }
 }

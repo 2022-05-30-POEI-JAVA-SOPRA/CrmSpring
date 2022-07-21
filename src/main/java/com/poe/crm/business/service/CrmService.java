@@ -81,4 +81,8 @@ public class CrmService {
             return false;
         }
     }
+
+    public List<Client> searchByCompanyName(String companyName){
+        return clientRepository.findAllByCompanyName(companyName);
+    }
 }

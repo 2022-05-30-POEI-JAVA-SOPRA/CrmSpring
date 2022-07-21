@@ -1,5 +1,7 @@
 package com.poe.crm.business;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,6 +24,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "clientId")
+    @JsonIgnore
     private Client client;
 
 

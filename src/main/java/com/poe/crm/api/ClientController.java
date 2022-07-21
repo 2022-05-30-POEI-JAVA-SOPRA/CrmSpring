@@ -1,5 +1,6 @@
 package com.poe.crm.api;
 
+import com.poe.crm.api.dto.ClientDTO;
 import com.poe.crm.business.Client;
 import com.poe.crm.business.service.CrmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,10 +30,13 @@ public class ClientController {
     }
 
     @GetMapping("clients/{id}")
-    public ResponseEntity<Client> findClientById(@PathVariable("id") Long id){
+    public ResponseEntity<ClientDTO> findClientById(@PathVariable("id") Long id){
         Optional<Client> o = crmService.findClient(id);
         if(o.isPresent()){
-            return ResponseEntity.status(HttpStatus.OK).body(o.get());
+            Client client = o.get();
+            ClientDTO clientDTO = new ClientDTO(client);
+            clientDTO.setTotalExpense(crmService.calculateExpense(client.getId()));
+            return ResponseEntity.status(HttpStatus.OK).body(clientDTO);
         }
         else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -86,4 +89,5 @@ public class ClientController {
 
         return crmService.searchByFirstNameAndLastName(firstName,lastName);
     }
+
 }

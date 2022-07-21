@@ -37,4 +37,12 @@ class CrmApplicationTests {
 		Assertions.assertTrue(sqlClients.size() > 0);
 	}
 
+	@Test
+	void testFindAllByCompanyName() {
+		List<Client> clientsGoogle = clientRepository.findAllByCompanyName("Google");
+		Assertions.assertTrue(clientsGoogle.size() > 0);
+		for(Client client: clientsGoogle){
+			System.out.println(client);
+		}
+	}
 }

@@ -1,6 +1,7 @@
 package com.poe.crm.api;
 
 import com.poe.crm.api.dto.ClientDTO;
+import com.poe.crm.api.dto.ClientMapper;
 import com.poe.crm.business.Client;
 import com.poe.crm.business.service.CrmService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,9 +21,15 @@ public class ClientController {
     CrmService crmService;
 
     @GetMapping("clients")
-    public List<Client> getAll() {
+    public List<ClientDTO> getAll() {
 
-        return crmService.getAllClients();
+        List<ClientDTO> json = new ArrayList<>();
+        for(Client client: crmService.getAllClients()){
+            ClientDTO clientDTO = ClientMapper.convertToDto(client);
+            clientDTO.setTotalExpense(crmService.calculateExpense(client.getId()));
+            json.add(clientDTO);
+        }
+        return json;
     }
 
     @PostMapping("clients")
@@ -34,7 +42,7 @@ public class ClientController {
         Optional<Client> o = crmService.findClient(id);
         if(o.isPresent()){
             Client client = o.get();
-            ClientDTO clientDTO = new ClientDTO(client);
+            ClientDTO clientDTO = ClientMapper.convertToDto(client);
             clientDTO.setTotalExpense(crmService.calculateExpense(client.getId()));
             return ResponseEntity.status(HttpStatus.OK).body(clientDTO);
         }

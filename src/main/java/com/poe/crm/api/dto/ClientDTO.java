@@ -1,10 +1,10 @@
 package com.poe.crm.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.poe.crm.business.Client;
 import com.poe.crm.business.ClientState;
 import com.poe.crm.business.Order;
 
-import javax.persistence.*;
 import java.util.List;
 
 public class ClientDTO {
@@ -27,24 +27,6 @@ public class ClientDTO {
     private float totalExpense;
 
     public ClientDTO(){
-    }
-
-    public ClientDTO(Client client){
-        this.id = client.getId();
-        this.companyName = client.getCompanyName();
-        this.firstName = client.getFirstName();
-        this.lastName = client.getLastName();
-        this.email = client.getEmail();
-        this.phone = client.getPhone();
-        this.address = client.getAddress();
-        this.zipCode = client.getZipCode();
-        this.city = client.getCity();
-        this.country = client.getCountry();
-
-        this.state = client.getState();
-
-        this.orders = client.getOrders();
-
     }
 
     public Long getId() {
